@@ -1,20 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
+import * as CounterCreators from "./actions/counterCreators";
 
 const App = (props) => {
   const { count, dispatch, step } = props;
   const increment = () => {
-    const action = { type: "INCREMENT" };
-    dispatch(action);
+    dispatch(CounterCreators.increment());
   };
   const decrement = () => {
-    const action = { type: "DECREMENT" };
-    dispatch(action);
+    dispatch(CounterCreators.decrement());
   };
-
   const handlerChange = ({ target: { value } }) => {
-    const action = { type: "SET_STEP", newStep: Number(value) };
-    dispatch(action);
+    dispatch(CounterCreators.setStep(Number(value)));
   };
 
   return (
@@ -35,8 +32,10 @@ export default connect(mapStateToProps)(App);
 
 /*
 store - общее хранилище js object
-reducer - чистая функция (state.action)=>newState
-dspatch - функция передвалальщик action
-action - object {type:""}
-connect - HOC, которая откусывает нужное состояние
- */
+reducer - чистая функция (state,action)=> newState
+dispatch - функция-передавальщик action 
+action - object {type:''}
+connect - HOC, которая подмешивает store
+mapStateToProps - функция которая откусывает нужное состояние
+Provider - компонент, который делится сторой
+*/
