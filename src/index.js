@@ -7,15 +7,19 @@ import App from "./App";
 
 const initialState = {
   count: 0,
+  step: 1,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "INCREMENT": {
-      return { count: state.count + 1 };
+      return { ...state, count: state.count + state.step };
     }
     case "DECREMENT": {
-      return { count: state.count - 1 };
+      return { ...state, count: state.count - state.step };
+    }
+    case "SET_STEP": {
+      return { ...state, step: action.newStep };
     }
     default:
       return state;
