@@ -24,9 +24,7 @@ const App = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return state;
-};
+const mapStateToProps = ({ count, step }) => ({ count, step });
 
 export default connect(mapStateToProps)(App);
 
