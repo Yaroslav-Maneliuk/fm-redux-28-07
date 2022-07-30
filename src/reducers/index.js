@@ -3,11 +3,52 @@ import ACTION_TYPES from "../actions/actionTypes";
 const initialState = {
   count: 0,
   step: 1,
-  newProps:true
+  tasks: [
+    {
+      id: 0,
+      body: "test task",
+      isDone: false,
+    },
+  ],
 };
+
+let serial = 1;
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ACTION_TYPES.CREATE_TASK: {
+      const { values } = action;
+      const { tasks } = state;
+      return {
+        ...state,
+        tasks: [...tasks, { ...values, id: serial++ }],
+      };
+    }
+    case ACTION_TYPES.UPDATE_TASK: {
+      const { id, values } = action;
+      const { tasks } = state;
+      const newTasks = tasks.map((task) => {
+        if (task.id === id) {
+          return {
+            ...task,
+            ...values,
+          };
+        }
+        return task;
+      });
+      return {
+        ...state,
+        tasks: newTasks,
+      };
+    }
+    case ACTION_TYPES.DELETE_TASK: {
+      // const { id } = action;
+      // const { tasks } = state;
+      return {
+        ...state,
+        task: state.tasks.filter((task) => task.id !== action.id),
+      };
+    }
     case ACTION_TYPES.INCREMENT: {
       return { ...state, count: state.count + state.step };
     }
