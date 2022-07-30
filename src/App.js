@@ -3,15 +3,9 @@ import { connect } from "react-redux";
 import * as CounterCreators from "./actions/counterCreators";
 
 const App = (props) => {
-  const { count, dispatch, step } = props;
-  const increment = () => {
-    dispatch(CounterCreators.increment());
-  };
-  const decrement = () => {
-    dispatch(CounterCreators.decrement());
-  };
+  const { count, step, increment, decrement, setStep } = props;
   const handlerChange = ({ target: { value } }) => {
-    dispatch(CounterCreators.setStep(Number(value)));
+    setStep(Number(value));
   };
 
   return (
@@ -26,7 +20,13 @@ const App = (props) => {
 
 const mapStateToProps = ({ count, step }) => ({ count, step });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  increment: () => dispatch(CounterCreators.increment()),
+  decrement: () => dispatch(CounterCreators.decrement()),
+  setStep: (newStep) => dispatch(CounterCreators.setStep(newStep)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 /*
 store - общее хранилище js object
