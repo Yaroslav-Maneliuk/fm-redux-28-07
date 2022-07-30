@@ -1,32 +1,22 @@
 import React from "react";
-import { connect } from "react-redux";
-import * as CounterCreators from "./actions/counterCreators";
+import Counter from "./components/Counter/index";
+import TaskForm from "./components/ToDo/TaskForm";
+import TasksList from "./components/ToDo/TasksList";
 
 const App = (props) => {
-  const { count, step, increment, decrement, setStep } = props;
-  const handlerChange = ({ target: { value } }) => {
-    setStep(Number(value));
-  };
-
   return (
-    <div>
-      <h2>Count:{count}</h2>
-      <button onClick={increment}>+</button>
-      <button onClick={decrement}>-</button>
-      <input type="number" value={step} onChange={handlerChange}></input>
-    </div>
+    <>
+      <Counter />
+      <hr />
+      <hr />
+      <hr />
+      <TaskForm />
+      <TasksList />
+    </>
   );
 };
 
-const mapStateToProps = ({ count, step }) => ({ count, step });
-
-const mapDispatchToProps = (dispatch) => ({
-  increment: () => dispatch(CounterCreators.increment()),
-  decrement: () => dispatch(CounterCreators.decrement()),
-  setStep: (newStep) => dispatch(CounterCreators.setStep(newStep)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
 
 /*
 store - общее хранилище js object
