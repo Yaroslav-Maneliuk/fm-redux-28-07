@@ -46,7 +46,7 @@ const reducer = (state = initialState, action) => {
       // const { tasks } = state;
       return {
         ...state,
-        task: state.tasks.filter((task) => task.id !== action.id),
+        tasks: state.tasks.filter((task) => task.id !== action.id),
       };
     }
     case ACTION_TYPES.INCREMENT: {
