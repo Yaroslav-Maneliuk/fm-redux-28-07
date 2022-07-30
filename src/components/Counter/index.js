@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as CounterCreators from "../../actions/counterCreators"
+import * as CounterCreators from "../../actions/counterCreators";
 
 const Counter = (props) => {
   const { count, step, increment, decrement, setStep } = props;
@@ -18,7 +18,7 @@ const Counter = (props) => {
   );
 };
 
-const mapStateToProps = ({ count, step }) => ({ count, step });
+const mapStateToProps = ({ counter }) => counter;
 
 const mapDispatchToProps = (dispatch) => ({
   increment: () => dispatch(CounterCreators.increment()),
